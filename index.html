@@ -11,147 +11,151 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:       #F5F3EE;
-      --charcoal: #1C1C1A;
-      --mid:      #5A5A55;
-      --light:    #A0A098;
-      --rule:     #E0DED6;
-      --synth-bg: #FAF7F5;
-      --c1: #F5E8E4;
-      --c2: #F5EDD8;
-      --c3: #E4EFE7;
-      --c4: #DDE8F0;
-      --c5: #EAE4F2;
+      --bg:        #F5F3EE;
+      --header-bg: #EAE6DC;
+      --charcoal:  #1C1C1A;
+      --mid:       #5A5A55;
+      --light:     #A0A098;
+      --rule:      #E0DED6;
+      --synth-bg:  #FAF7F5;
+      --c1: #F5E8E4; --c2: #F5EDD8; --c3: #E4EFE7; --c4: #DDE8F0; --c5: #EAE4F2;
     }
     html { font-size: 17px; background: var(--bg); color: var(--charcoal); -webkit-font-smoothing: antialiased; }
     body { font-family: 'Spectral', Georgia, serif; background: var(--bg); min-height: 100vh; }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 2.5rem; }
 
-    header { padding: 4.5rem 0 0; text-align: center; }
-    h1 { font-family: 'Raleway', sans-serif; font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.025em; color: var(--charcoal); margin-bottom: 0.6rem; }
-    .subtitle { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 400; color: var(--mid); margin-bottom: 1.6rem; line-height: 1.5; }
-
-    .byline { display: flex; align-items: center; justify-content: center; font-family: 'Spectral', serif; font-size: 0.85rem; font-style: italic; color: var(--mid); margin-bottom: 2.8rem; flex-wrap: wrap; }
+    /* ── Header band ── */
+    .header-band { background: var(--header-bg); width: 100%; }
+    header { max-width: 720px; margin: 0 auto; padding: 5rem 2.5rem 4.5rem; text-align: center; }
+    h1 { font-family: 'Raleway', sans-serif; font-size: clamp(2.8rem, 7vw, 4.4rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; color: var(--charcoal); margin-bottom: 0.75rem; }
+    .subtitle { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 400; color: var(--mid); margin-bottom: 1.8rem; line-height: 1.5; }
+    .byline { display: flex; align-items: center; justify-content: center; font-family: 'Spectral', serif; font-size: 0.85rem; font-style: italic; color: var(--mid); flex-wrap: wrap; }
     .byline a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
     .byline a:hover { color: var(--charcoal); }
     .byline-sep { display: inline-block; width: 1px; height: 0.85em; background: var(--light); margin: 0 0.75rem; vertical-align: middle; }
 
-    .rule { border: none; border-top: 1px solid var(--rule); margin-bottom: 2.8rem; }
+    /* ── Main content ── */
+    .container { max-width: 720px; margin: 0 auto; padding: 2.8rem 2.5rem 0; }
+    .rule { display: none; }
 
-    .synth-card { background: var(--synth-bg); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 1rem; }
+    /* ── Synthesis card ── */
+    .synth-card { background: var(--synth-bg); border: 1px solid var(--rule); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 1rem; }
     .synth-preview { font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
     .synth-full { display: none; font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
     .synth-full.open { display: block; }
     .synth-full p { margin-top: 1.1rem; }
 
+    /* ── Shared CTA style ── */
     .cta { display: inline-block; margin-top: 1rem; font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); background: none; border: none; cursor: pointer; padding: 0; transition: opacity 0.2s; text-decoration: none; }
-    .cta:hover { opacity: 0.6; }
+    .cta:hover { opacity: 0.5; }
 
+    /* ── Cluster cards ── */
     .clusters { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 4.5rem; }
     .card { border-radius: 16px; padding: 1.6rem 1.8rem; text-decoration: none; display: block; transition: transform 0.15s ease, box-shadow 0.15s ease; }
     .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
-    .card.c1 { background: var(--c1); border: 1px solid var(--rule); }
-    .card.c2 { background: var(--c2); }
-    .card.c3 { background: var(--c3); }
-    .card.c4 { background: var(--c4); }
-    .card.c5 { background: var(--c5); }
+    .card.c1 { background: var(--c1); } .card.c2 { background: var(--c2); } .card.c3 { background: var(--c3); } .card.c4 { background: var(--c4); } .card.c5 { background: var(--c5); }
     .card-title { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.55rem; letter-spacing: -0.01em; color: var(--charcoal); }
     .card-body { font-family: 'Spectral', serif; font-size: 0.88rem; line-height: 1.72; color: var(--mid); }
 
-    footer { border-top: 1px solid var(--rule); padding: 2.4rem 0 3.5rem; }
+    /* ── Footer ── */
+    footer { padding: 2.4rem 0 3.5rem; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; padding: 0 3rem; }
     .logo-ph { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); border: 1px solid var(--rule); padding: 0.45rem 1rem; border-radius: 3px; }
 
+    /* ── Animations ── */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    header { animation: fadeUp 0.5s ease both; }
-    .synth-card { animation: fadeUp 0.5s ease 0.1s both; }
-    .clusters { animation: fadeUp 0.5s ease 0.2s both; }
-    footer { animation: fadeUp 0.5s ease 0.3s both; }
+    .header-band { animation: fadeUp 0.5s ease both; }
+    .synth-card   { animation: fadeUp 0.5s ease 0.1s both; }
+    .clusters     { animation: fadeUp 0.5s ease 0.2s both; }
+    footer        { animation: fadeUp 0.5s ease 0.3s both; }
 
     @media (max-width: 540px) {
+      header { padding: 3rem 1.4rem 3rem; }
       .container { padding: 0 1.4rem; }
-      header { padding-top: 3rem; }
       .card { padding: 1.3rem 1.4rem; }
       .synth-card { padding: 1.4rem 1.4rem; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-inner { flex-direction: column; align-items: flex-start; padding: 0; }
     }
   </style>
 </head>
 <body>
-<div class="container">
 
-  <header>
-    <h1>Twenty Years of Asking</h1>
-    <p class="subtitle">What Field Experiments Have Taught Us About Fundraising</p>
-    <div class="byline">
-      <a href="https://www.wzb.eu/en/persons/maja-adena" target="_blank" rel="noopener">Maja Adena</a>
-      <span class="byline-sep"></span>
-      <a href="https://steffenhuck.github.io" target="_blank" rel="noopener">Steffen Huck</a>
-      <span class="byline-sep"></span>
-      <a href="https://www.actori.de/en/about-us/prof-maurice-lausberg" target="_blank" rel="noopener">Maurice Lausberg</a>
-    </div>
-  </header>
-
-  <hr class="rule">
-
-  <div class="synth-card">
-    <p class="synth-preview">The puzzle that started this research programme is familiar to anyone who has ever run a fundraising campaign. What works?</p>
-    <div class="synth-full" id="synth-full">
-      <p>Should you offer to match donations? Should you announce that a major donor has already given? Does it help to suggest an amount? Should you say thank you in advance — or send a handwritten note afterwards? Most of the time, fundraisers answer these questions on the basis of intuition, tradition, or the advice of consultancies. But intuition is a poor guide when human behaviour is involved, and the answers turn out to be far more interesting — and counterintuitive — than common sense suggests.</p>
-      <p>The programme began in 2006 with a single large mail-out for the Bavarian State Opera. Fourteen thousand letters went out, randomly assigned to different versions of the same appeal. The results startled the field. Announcing that a lead donor had already given a major gift nearly doubled donations. Offering a 1:1 match — long considered the gold standard of fundraising incentives — actually reduced revenue, because regular donors scaled back what they gave from their own pocket once they knew their gift would be amplified. The match attracted a few extra small donors, but the loss from existing donors was larger.</p>
-      <p>That single experiment opened a research agenda that has now run for twenty years and produced the seventeen papers gathered on this site. The first cluster of work explored when matching helps and when it hurts. The headline answer: lead gifts almost always beat linear matches, but the rule reverses among the very poor, where price matters far more than signalling. If you must match, design the contract carefully — a personalised threshold or a non-linear structure outperforms a flat 1:1.</p>
-      <p>The second cluster turned to a different question: how does the structure of the ask itself shape giving, when the price is held constant? Three studies showed that hassle is the single biggest leak in most appeals — a pre-filled bank transfer form lifted response by 26%. Suggested donation amounts moved gifts up but cut response slightly. And two preregistered field experiments found that handwritten thank-you cards and "thank you in advance" phrases — both fundraiser favourites — had no measurable effect at all.</p>
-      <p>The third cluster looked at the donors themselves. Aristocrats give at extraordinary rates out of something close to social obligation; corporates, by contrast, give more when matching is absent, suggesting their giving is motivated by competitive signalling rather than warmth. Most importantly, what donors do today predicts what they do tomorrow with remarkable accuracy. In a two-year experiment at Dresden's Semperoper, year-one and year-two giving correlated at 0.78. The first gift you secure essentially sets the relationship.</p>
-      <p>The fourth cluster turned to psychology. The word "donation" raised crowdfunding revenue by 80% over the word "contribution". Forcing online opera customers to actively click "No, thank you" rather than slip past silently increased giving sevenfold — but those customers quietly bought fewer tickets the following season. During COVID-19, donations rose sharply where the pandemic was more severe and more covered in the news, even after stripping out the negative economic effects of the crisis. Attention is a powerful, underused fundraising lever.</p>
-      <p>The fifth cluster zoomed out to the broader environment in which fundraising happens. A nationwide Facebook campaign across 94% of Germany's postcodes showed that online fundraising is genuinely profitable — but it drains giving to other charities, so the sector grows less than any single campaign's results suggest. Quality certifications raise donations by about 10%, mostly among new donors who are forming a first impression. And the field-experimental evidence challenges the standard tax-deduction model, suggesting that simpler alternatives would do more good than the current rebate system.</p>
-      <p>What does it all add up to? Three messages stand out. First, fundraisers' intuitions are wrong more often than they are right, and small experiments have repeatedly produced findings that no amount of armchair theorising would have predicted. Second, what looks like growth in one charity often comes at the expense of another — the donor pie expands less easily than people assume, and rigorous evaluation of any campaign needs to consider what would have happened in its absence. Third, the most powerful tools are also among the simplest: reduce friction, secure and announce a lead gift, choose your words carefully, and recognise that what donors do the first time will largely set the pattern of their giving for years to come.</p>
-    </div>
-    <button class="cta" id="read-more-btn" onclick="toggleSynth()">Read more →</button>
+  <div class="header-band">
+    <header>
+      <h1>Twenty Years of Asking</h1>
+      <p class="subtitle">What Field Experiments Have Taught Us About Fundraising</p>
+      <div class="byline">
+        <a href="https://www.wzb.eu/en/persons/maja-adena" target="_blank" rel="noopener">Maja Adena</a>
+        <span class="byline-sep"></span>
+        <a href="https://steffenhuck.github.io" target="_blank" rel="noopener">Steffen Huck</a>
+        <span class="byline-sep"></span>
+        <a href="https://www.actori.de/en/about-us/prof-maurice-lausberg" target="_blank" rel="noopener">Maurice Lausberg</a>
+      </div>
+    </header>
   </div>
 
-  <div class="clusters">
-    <a href="cluster1.html" class="card c1">
-      <p class="card-title">Why a Lead Gift Often Beats a Match</p>
-      <p class="card-body">Five experiments across Germany and Kyrgyzstan test when matching helps, when it hurts, and why. The answer depends on who your donors are, how you structure the contract, and whether signalling or price is the dominant motive.</p>
-      <span class="cta">Explore →</span>
-    </a>
-    <a href="cluster2.html" class="card c2">
-      <p class="card-title">Make It Easy, Suggest a Number, Skip the Thank-You</p>
-      <p class="card-body">Three studies examine how the design of the ask itself shapes giving — from transaction costs and suggested amounts to gratitude rituals. Small changes to the form produce large changes in response; cherished fundraising habits turn out to have no effect at all.</p>
-      <span class="cta">Explore →</span>
-    </a>
-    <a href="cluster3.html" class="card c3">
-      <p class="card-title">Donors Don't All Look Alike — and Today's Gift Predicts Tomorrow's</p>
-      <p class="card-body">Three papers look at who gives, why, and what their first gift tells you about their future behaviour. Aristocrats, corporates, and regular donors follow entirely different logics — and a two-year experiment reveals that early giving patterns are remarkably stable over time.</p>
-      <span class="cta">Explore →</span>
-    </a>
-    <a href="cluster4.html" class="card c4">
-      <p class="card-title">Words, Tickboxes, and the Power of Attention</p>
-      <p class="card-body">Three experiments probe the psychology of giving without touching the price: how framing a request changes revenue, what happens when you force an active decision rather than letting people drift past, and why donations rose during COVID-19 even where economic hardship was greatest.</p>
-      <span class="cta">Explore →</span>
-    </a>
-    <a href="cluster5.html" class="card c5">
-      <p class="card-title">The Bigger Picture: Online Platforms, Trust Marks, and the Tax Code</p>
-      <p class="card-body">Three studies step back from the individual appeal to examine the ecosystem. A nationwide Facebook campaign, a quality certification trial, and a review of tax incentives together ask: does fundraising grow the donor pie, or just redistribute it — and what policy tools actually work?</p>
-      <span class="cta">Explore →</span>
-    </a>
+  <div class="container">
+
+    <hr class="rule">
+
+    <div class="synth-card">
+      <p class="synth-preview">The puzzle that started this research programme is familiar to anyone who has ever run a fundraising campaign. What works?</p>
+      <div class="synth-full" id="synth-full">
+        <p>Should you offer to match donations? Should you announce that a major donor has already given? Does it help to suggest an amount? Should you say thank you in advance — or send a handwritten note afterwards? Most of the time, fundraisers answer these questions on the basis of intuition, tradition, or the advice of consultancies. But intuition is a poor guide when human behaviour is involved, and the answers turn out to be far more interesting — and counterintuitive — than common sense suggests.</p>
+        <p>The programme began in 2006 with a single large mail-out for the Bavarian State Opera. Fourteen thousand letters went out, randomly assigned to different versions of the same appeal. The results startled the field. Announcing that a lead donor had already given a major gift nearly doubled donations. Offering a 1:1 match — long considered the gold standard of fundraising incentives — actually reduced revenue, because regular donors scaled back what they gave from their own pocket once they knew their gift would be amplified. The match attracted a few extra small donors, but the loss from existing donors was larger.</p>
+        <p>That single experiment opened a research agenda that has now run for twenty years and produced the seventeen papers gathered on this site. The first cluster of work explored when matching helps and when it hurts. The headline answer: lead gifts almost always beat linear matches, but the rule reverses among the very poor, where price matters far more than signalling. If you must match, design the contract carefully — a personalised threshold or a non-linear structure outperforms a flat 1:1.</p>
+        <p>The second cluster turned to a different question: how does the structure of the ask itself shape giving, when the price is held constant? Three studies showed that hassle is the single biggest leak in most appeals — a pre-filled bank transfer form lifted response by 26%. Suggested donation amounts moved gifts up but cut response slightly. And two preregistered field experiments found that handwritten thank-you cards and "thank you in advance" phrases — both fundraiser favourites — had no measurable effect at all.</p>
+        <p>The third cluster looked at the donors themselves. Aristocrats give at extraordinary rates out of something close to social obligation; corporates, by contrast, give more when matching is absent, suggesting their giving is motivated by competitive signalling rather than warmth. Most importantly, what donors do today predicts what they do tomorrow with remarkable accuracy. In a two-year experiment at Dresden's Semperoper, year-one and year-two giving correlated at 0.78. The first gift you secure essentially sets the relationship.</p>
+        <p>The fourth cluster turned to psychology. The word "donation" raised crowdfunding revenue by 80% over the word "contribution". Forcing online opera customers to actively click "No, thank you" rather than slip past silently increased giving sevenfold — but those customers quietly bought fewer tickets the following season. During COVID-19, donations rose sharply where the pandemic was more severe and more covered in the news, even after stripping out the negative economic effects of the crisis. Attention is a powerful, underused fundraising lever.</p>
+        <p>The fifth cluster zoomed out to the broader environment in which fundraising happens. A nationwide Facebook campaign across 94% of Germany's postcodes showed that online fundraising is genuinely profitable — but it drains giving to other charities, so the sector grows less than any single campaign's results suggest. Quality certifications raise donations by about 10%, mostly among new donors who are forming a first impression. And the field-experimental evidence challenges the standard tax-deduction model, suggesting that simpler alternatives would do more good than the current rebate system.</p>
+        <p>What does it all add up to? Three messages stand out. First, fundraisers' intuitions are wrong more often than they are right, and small experiments have repeatedly produced findings that no amount of armchair theorising would have predicted. Second, what looks like growth in one charity often comes at the expense of another — the donor pie expands less easily than people assume, and rigorous evaluation of any campaign needs to consider what would have happened in its absence. Third, the most powerful tools are also among the simplest: reduce friction, secure and announce a lead gift, choose your words carefully, and recognise that what donors do the first time will largely set the pattern of their giving for years to come.</p>
+      </div>
+      <button class="cta" id="read-more-btn" onclick="toggleSynth()">Read more →</button>
+    </div>
+
+    <div class="clusters">
+      <a href="cluster1.html" class="card c1">
+        <p class="card-title">Why a Lead Gift Often Beats a Match</p>
+        <p class="card-body">Five experiments across Germany and Kyrgyzstan test when matching helps, when it hurts, and why. The answer depends on who your donors are, how you structure the contract, and whether signalling or price is the dominant motive.</p>
+        <span class="cta">Explore →</span>
+      </a>
+      <a href="cluster2.html" class="card c2">
+        <p class="card-title">Make It Easy, Suggest a Number, Skip the Thank-You</p>
+        <p class="card-body">Three studies examine how the design of the ask itself shapes giving — from transaction costs and suggested amounts to gratitude rituals. Small changes to the form produce large changes in response; cherished fundraising habits turn out to have no effect at all.</p>
+        <span class="cta">Explore →</span>
+      </a>
+      <a href="cluster3.html" class="card c3">
+        <p class="card-title">Donors Don't All Look Alike — and Today's Gift Predicts Tomorrow's</p>
+        <p class="card-body">Three papers look at who gives, why, and what their first gift tells you about their future behaviour. Aristocrats, corporates, and regular donors follow entirely different logics — and a two-year experiment reveals that early giving patterns are remarkably stable over time.</p>
+        <span class="cta">Explore →</span>
+      </a>
+      <a href="cluster4.html" class="card c4">
+        <p class="card-title">Words, Tickboxes, and the Power of Attention</p>
+        <p class="card-body">Three experiments probe the psychology of giving without touching the price: how framing a request changes revenue, what happens when you force an active decision rather than letting people drift past, and why donations rose during COVID-19 even where economic hardship was greatest.</p>
+        <span class="cta">Explore →</span>
+      </a>
+      <a href="cluster5.html" class="card c5">
+        <p class="card-title">The Bigger Picture: Online Platforms, Trust Marks, and the Tax Code</p>
+        <p class="card-body">Three studies step back from the individual appeal to examine the ecosystem. A nationwide Facebook campaign, a quality certification trial, and a review of tax incentives together ask: does fundraising grow the donor pie, or just redistribute it — and what policy tools actually work?</p>
+        <span class="cta">Explore →</span>
+      </a>
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="logo-ph">WZB Berlin</div>
+        <div class="logo-ph">Actori</div>
+      </div>
+    </footer>
+
   </div>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="logo-ph">WZB Berlin</div>
-      <div class="logo-ph">Actori</div>
-    </div>
-  </footer>
-
-</div>
-<script>
-  function toggleSynth() {
-    const full = document.getElementById('synth-full');
-    const btn = document.getElementById('read-more-btn');
-    full.classList.toggle('open');
-    btn.textContent = full.classList.contains('open') ? 'Read less →' : 'Read more →';
-  }
-</script>
+  <script>
+    function toggleSynth() {
+      const full = document.getElementById('synth-full');
+      const btn  = document.getElementById('read-more-btn');
+      full.classList.toggle('open');
+      btn.textContent = full.classList.contains('open') ? 'Read less →' : 'Read more →';
+    }
+  </script>
 </body>
 </html>
