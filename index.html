@@ -23,9 +23,9 @@
     html { font-size: 17px; background: var(--bg); color: var(--charcoal); -webkit-font-smoothing: antialiased; }
     body { font-family: 'Spectral', Georgia, serif; background: var(--bg); min-height: 100vh; }
 
-    /* ── Header band ── */
-    .header-band { background: var(--header-bg); width: 100%; }
-    header { max-width: 720px; margin: 0 auto; padding: 5rem 2.5rem 4.5rem; text-align: center; }
+    /* ── Header card ── */
+    .header-wrap { padding: 3rem 1.5rem 2rem; max-width: 860px; margin: 0 auto; }
+    .header-card { background: var(--header-bg); border-radius: 20px; padding: 4rem 3rem 3.5rem; text-align: center; }
     h1 { font-family: 'Raleway', sans-serif; font-size: clamp(2.8rem, 7vw, 4.4rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; color: var(--charcoal); margin-bottom: 0.75rem; }
     .subtitle { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 400; color: var(--mid); margin-bottom: 1.8rem; line-height: 1.5; }
     .byline { display: flex; align-items: center; justify-content: center; font-family: 'Spectral', serif; font-size: 0.85rem; font-style: italic; color: var(--mid); flex-wrap: wrap; }
@@ -34,8 +34,7 @@
     .byline-sep { display: inline-block; width: 1px; height: 0.85em; background: var(--light); margin: 0 0.75rem; vertical-align: middle; }
 
     /* ── Main content ── */
-    .container { max-width: 720px; margin: 0 auto; padding: 2.8rem 2.5rem 0; }
-    .rule { display: none; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 2.5rem; }
 
     /* ── Synthesis card ── */
     .synth-card { background: var(--synth-bg); border: 1px solid var(--rule); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 1rem; }
@@ -63,13 +62,14 @@
 
     /* ── Animations ── */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    .header-band { animation: fadeUp 0.5s ease both; }
-    .synth-card   { animation: fadeUp 0.5s ease 0.1s both; }
-    .clusters     { animation: fadeUp 0.5s ease 0.2s both; }
-    footer        { animation: fadeUp 0.5s ease 0.3s both; }
+    .header-wrap { animation: fadeUp 0.5s ease both; }
+    .synth-card  { animation: fadeUp 0.5s ease 0.1s both; }
+    .clusters    { animation: fadeUp 0.5s ease 0.2s both; }
+    footer       { animation: fadeUp 0.5s ease 0.3s both; }
 
     @media (max-width: 540px) {
-      header { padding: 3rem 1.4rem 3rem; }
+      .header-wrap { padding: 2rem 1rem 1.5rem; }
+      .header-card { padding: 2.5rem 1.5rem 2.5rem; }
       .container { padding: 0 1.4rem; }
       .card { padding: 1.3rem 1.4rem; }
       .synth-card { padding: 1.4rem 1.4rem; }
@@ -79,8 +79,8 @@
 </head>
 <body>
 
-  <div class="header-band">
-    <header>
+  <div class="header-wrap">
+    <div class="header-card">
       <h1>Twenty Years of Asking</h1>
       <p class="subtitle">What Field Experiments Have Taught Us About Fundraising</p>
       <div class="byline">
@@ -90,12 +90,10 @@
         <span class="byline-sep"></span>
         <a href="https://www.actori.de/en/about-us/prof-maurice-lausberg" target="_blank" rel="noopener">Maurice Lausberg</a>
       </div>
-    </header>
+    </div>
   </div>
 
   <div class="container">
-
-    <hr class="rule">
 
     <div class="synth-card">
       <p class="synth-preview">The puzzle that started this research programme is familiar to anyone who has ever run a fundraising campaign. What works?</p>
