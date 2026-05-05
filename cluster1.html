@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why a Lead Gift Often Beats a Match</title>
+  <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #F5F3EE;
+      --header-bg:#F0E0DA;
+      --card-bg:  #F5E8E4;
+      --charcoal: #1C1C1A;
+      --mid:      #5A5A55;
+      --light:    #A0A098;
+      --rule:     #E0DED6;
+      --accent:   #A85E4C;
+    }
+    html { font-size: 17px; background: var(--bg); color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Spectral', Georgia, serif; background: var(--bg); min-height: 100vh; }
+
+    /* ── Header card ── */
+    .header-wrap { padding: 3rem 1.5rem 2rem; max-width: 860px; margin: 0 auto; }
+    .header-card { background: var(--header-bg); border-radius: 20px; padding: 4rem 3rem 3.5rem; text-align: center; }
+    .back-link { display: inline-block; font-family: 'Raleway', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light); text-decoration: none; margin-bottom: 1rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--mid); }
+
+    h1 { font-family: 'Raleway', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; color: var(--charcoal); }
+
+    /* ── Main content ── */
+    .container { max-width: 720px; margin: 0 auto; padding: 0 2.5rem 4rem; }
+
+    /* ── Section label ── */
+    .section-label { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; margin-top: 2rem; }
+
+    /* ── Summary card ── */
+    .summary-card { background: var(--card-bg); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 2rem; }
+    .summary-preview { font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
+    .summary-full { display: none; font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
+    .summary-full.open { display: block; }
+    .summary-full p { margin-top: 1.1rem; }
+
+    /* ── CTA ── */
+    .cta { display: inline-block; margin-top: 1rem; font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); background: none; border: none; cursor: pointer; padding: 0; transition: opacity 0.2s; text-decoration: none; }
+    .cta:hover { opacity: 0.5; }
+
+    /* ── Action cards ── */
+    .action-cards { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+    .action-card { background: var(--card-bg); border-radius: 16px; padding: 1.4rem 1.6rem; text-decoration: none; flex: 1; min-width: 140px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .action-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    .action-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .action-label { font-family: 'Raleway', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.2rem; }
+    .action-sub { font-family: 'Spectral', serif; font-size: 0.78rem; font-style: italic; color: var(--mid); }
+
+    /* ── Papers ── */
+    .papers { display: flex; flex-direction: column; gap: 1.2rem; }
+    .paper { border-left: 2px solid var(--card-bg); padding-left: 1.2rem; }
+    .paper-citation { font-family: 'Spectral', serif; font-size: 0.88rem; line-height: 1.65; color: var(--mid); }
+    .paper-citation em { font-style: italic; }
+    .paper-link { display: inline-block; margin-top: 0.35rem; font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    .paper-link:hover { opacity: 0.6; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .header-wrap  { animation: fadeUp 0.5s ease both; }
+    .summary-card { animation: fadeUp 0.5s ease 0.1s both; }
+    .action-cards { animation: fadeUp 0.5s ease 0.2s both; }
+    .papers       { animation: fadeUp 0.5s ease 0.3s both; }
+
+    @media (max-width: 540px) {
+      .header-wrap { padding: 2rem 1rem 1.5rem; }
+      .header-card { padding: 2.5rem 1.5rem 2.5rem; }
+      .container { padding: 0 1.4rem 3rem; }
+      .action-card { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-wrap">
+    <div class="header-card">
+      <h1>Why a Lead Gift Often Beats a Match</h1>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <p class="section-label">Summary</p>
+    <div class="summary-card">
+      <p class="summary-preview">For decades, fundraisers have assumed that promising to match donations 1:1 is the most powerful incentive available. The evidence here tells a more nuanced story.</p>
+      <div class="summary-full" id="summary-full">
+        <p>In a series of large field experiments with the Bavarian State Opera, simply announcing that a major donor had already given a large lead gift nearly doubled revenue over a standard appeal — without changing how many people gave. Linear matching, by contrast, attracted slightly more donors but caused regular donors to scale back their own gifts, leaving total revenue lower than the lead-gift approach.</p>
+        <p>Two important caveats followed. First, if you must match, structure it cleverly: match only above a threshold, or set a personalised threshold just above the donor's previous gift. Second, the standard wisdom flips for low-income donors. In a 185,000-person experiment in Kyrgyzstan, matching genuinely raised total giving by 37% — because poor donors are far more sensitive to price.</p>
+        <p>Practical takeaway: announce big gifts already received, and reserve matching for donors who cannot otherwise afford to give.</p>
+      </div>
+      <button class="cta" id="read-more-btn" onclick="toggleSummary()">Read more →</button>
+    </div>
+
+    <p class="section-label">Explore</p>
+    <div class="action-cards">
+      <a href="#" class="action-card">
+        <div class="action-icon">🎧</div>
+        <p class="action-label">Listen</p>
+        <p class="action-sub">Podcast — coming soon</p>
+      </a>
+      <a href="#" class="action-card">
+        <div class="action-icon">▶</div>
+        <p class="action-label">Watch</p>
+        <p class="action-sub">Video — coming soon</p>
+      </a>
+      <a href="#" class="action-card">
+        <div class="action-icon">✦</div>
+        <p class="action-label">More</p>
+        <p class="action-sub">Coming soon</p>
+      </a>
+    </div>
+
+    <p class="section-label">Papers</p>
+    <div class="papers">
+
+      <div class="paper">
+        <p class="paper-citation">Huck, S. &amp; Rasul, I. (2011). Matched fundraising: Evidence from a natural field experiment. <em>Journal of Public Economics</em>, 95(5–6), 351–362.</p>
+        <a href="papers/huck_rasul_jpube.pdf" class="paper-link">PDF →</a>
+      </div>
+
+      <div class="paper">
+        <p class="paper-citation">Huck, S., Rasul, I. &amp; Shephard, A. (2015). Comparing charitable fundraising schemes: Evidence from a natural field experiment and a structural model. <em>American Economic Journal: Economic Policy</em>, 7(2), 326–369.</p>
+        <a href="papers/huck_rasul_shephard.pdf" class="paper-link">PDF →</a>
+      </div>
+
+      <div class="paper">
+        <p class="paper-citation">Adena, M. &amp; Huck, S. (2017). Matching donations without crowding out: Some theoretical considerations and a field experiment. <em>Journal of Public Economics</em>, 148, 32–42.</p>
+        <a href="papers/adena_huck_jpube_matching_without.pdf" class="paper-link">PDF →</a>
+      </div>
+
+      <div class="paper">
+        <p class="paper-citation">Adena, M. &amp; Huck, S. (2022). Personalized fundraising: A field experiment on threshold matching of donations. <em>Journal of Economic Behavior &amp; Organization</em>, 200, 1–20.</p>
+        <a href="papers/adena_huck_personalized.pdf" class="paper-link">PDF →</a>
+      </div>
+
+      <div class="paper">
+        <p class="paper-citation">Adena, M., Hakimov, R. &amp; Huck, S. (2020). Price-matching guarantees and charitable giving: Evidence from a large-scale natural field experiment. Working paper.</p>
+        <a href="papers/adena_hakimov_huck.pdf" class="paper-link">PDF →</a>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <a href="index.html" class="back-link">← Back to overview</a>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleSummary() {
+      const full = document.getElementById('summary-full');
+      const btn  = document.getElementById('read-more-btn');
+      full.classList.toggle('open');
+      btn.textContent = full.classList.contains('open') ? 'Read less →' : 'Read more →';
+    }
+  </script>
+</body>
+</html>
