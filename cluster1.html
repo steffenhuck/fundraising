@@ -31,7 +31,6 @@
 
     .section-label { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; margin-top: 2rem; }
 
-    /* ── Summary card ── */
     .summary-card { background: var(--card-bg); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 2rem; }
     .summary-preview { font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
     .summary-full { display: none; font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
@@ -42,19 +41,23 @@
 
     /* ── Action row ── */
     .action-row { display: flex; gap: 1rem; margin-bottom: 0; }
-    .action-card { background: var(--card-bg); border-radius: 16px; padding: 1.4rem 1.6rem; flex: 1; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; user-select: none; }
+    .action-card { background: var(--card-bg); border-radius: 16px; padding: 1.4rem 1.6rem; flex: 1; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; user-select: none; text-align: left; }
     .action-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
     .action-card.active { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
     .action-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .action-label { font-family: 'Raleway', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.2rem; }
-    .action-sub { font-family: 'Spectral', serif; font-size: 0.78rem; font-style: italic; color: var(--mid); }
+    .action-label { font-family: 'Raleway', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--charcoal); }
 
     /* ── Drawer ── */
     .action-drawer { display: none; background: var(--card-bg); border-radius: 0 0 16px 16px; padding: 1.4rem 1.6rem 1.6rem; margin-bottom: 2rem; }
     .action-drawer.open { display: block; }
     audio { width: 100%; border-radius: 8px; accent-color: var(--accent); }
     video { width: 100%; border-radius: 10px; }
-    .infographic img { width: 100%; border-radius: 10px; }
+    .infographic-thumb { width: 100%; border-radius: 10px; cursor: zoom-in; display: block; }
+
+    /* ── Lightbox ── */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; cursor: zoom-out; align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 
     /* ── Papers ── */
     .papers { display: flex; flex-direction: column; gap: 1.2rem; }
@@ -108,17 +111,14 @@
       <div class="action-card" id="card-listen" onclick="toggleDrawer('listen')">
         <div class="action-icon">🎧</div>
         <p class="action-label">Listen</p>
-        <p class="action-sub">Podcast</p>
       </div>
       <div class="action-card" id="card-watch" onclick="toggleDrawer('watch')">
         <div class="action-icon">▶</div>
         <p class="action-label">Watch</p>
-        <p class="action-sub">Video</p>
       </div>
       <div class="action-card" id="card-info" onclick="toggleDrawer('info')">
         <div class="action-icon">✦</div>
         <p class="action-label">Infographic</p>
-        <p class="action-sub">Visual summary</p>
       </div>
     </div>
 
@@ -128,7 +128,12 @@
     <div class="action-drawer" id="drawer-watch">
       <video controls src="cluster1.mp4">Your browser does not support the video element.</video>
     </div>
-    <div class="action-drawer infographic" id="drawer-info">
+    <div class="action-drawer" id="drawer-info">
+      <img class="infographic-thumb" src="cluster1.png" alt="Infographic: The Fundraiser's Strategy Guide — Beyond the Linear Match" onclick="openLightbox(event)">
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
       <img src="cluster1.png" alt="Infographic: The Fundraiser's Strategy Guide — Beyond the Linear Match">
     </div>
 
@@ -179,26 +184,35 @@
     const drawers = ['listen', 'watch', 'info'];
 
     function toggleDrawer(id) {
-      const drawer  = document.getElementById('drawer-' + id);
-      const card    = document.getElementById('card-' + id);
-      const isOpen  = drawer.classList.contains('open');
+      const drawer = document.getElementById('drawer-' + id);
+      const card   = document.getElementById('card-' + id);
+      const isOpen = drawer.classList.contains('open');
 
-      // Close all drawers and deactivate all cards
       drawers.forEach(function(d) {
-        const el = document.getElementById('drawer-' + d);
-        const cd = document.getElementById('card-' + d);
-        el.classList.remove('open');
-        cd.classList.remove('active');
-        const media = el.querySelector('audio, video');
+        document.getElementById('drawer-' + d).classList.remove('open');
+        document.getElementById('card-' + d).classList.remove('active');
+        const media = document.getElementById('drawer-' + d).querySelector('audio, video');
         if (media) media.pause();
       });
 
-      // If it wasn't open, open it
       if (!isOpen) {
         drawer.classList.add('open');
         card.classList.add('active');
       }
     }
+
+    function openLightbox(e) {
+      e.stopPropagation();
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 </body>
 </html>
