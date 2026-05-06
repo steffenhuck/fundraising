@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make It Easy, Suggest a Number, Skip the Thank-You</title>
+  <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #F5F3EE;
+      --header-bg:#F0E8D0;
+      --card-bg:  #F5EDD8;
+      --charcoal: #1C1C1A;
+      --mid:      #5A5A55;
+      --light:    #A0A098;
+      --rule:     #E0DED6;
+      --accent:   #9A7030;
+    }
+    html { font-size: 17px; background: var(--bg); color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Spectral', Georgia, serif; background: var(--bg); min-height: 100vh; }
+    .header-wrap { padding: 3rem 1.5rem 2rem; max-width: 860px; margin: 0 auto; }
+    .header-card { background: var(--header-bg); border-radius: 20px; padding: 4rem 3rem 3.5rem; text-align: center; }
+    h1 { font-family: 'Raleway', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; color: var(--charcoal); }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 2.5rem 4rem; }
+    .section-label { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; margin-top: 2rem; }
+    .summary-card { background: var(--card-bg); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 2rem; }
+    .summary-preview { font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
+    .summary-full { display: none; font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
+    .summary-full.open { display: block; }
+    .summary-full p { margin-top: 1.1rem; }
+    .cta { display: inline-block; margin-top: 1rem; font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); background: none; border: none; cursor: pointer; padding: 0; transition: opacity 0.2s; text-decoration: none; }
+    .cta:hover { opacity: 0.5; }
+    .action-cards { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+    .action-card { background: var(--card-bg); border-radius: 16px; padding: 1.4rem 1.6rem; text-decoration: none; flex: 1; min-width: 140px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .action-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    .action-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .action-label { font-family: 'Raleway', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.2rem; }
+    .action-sub { font-family: 'Spectral', serif; font-size: 0.78rem; font-style: italic; color: var(--mid); }
+    .papers { display: flex; flex-direction: column; gap: 1.2rem; }
+    .paper { border-left: 2px solid var(--card-bg); padding-left: 1.2rem; }
+    .paper-citation { font-family: 'Spectral', serif; font-size: 0.88rem; line-height: 1.65; color: var(--mid); }
+    .paper-citation em { font-style: italic; }
+    .paper-link { display: inline-block; margin-top: 0.35rem; font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    .paper-link:hover { opacity: 0.6; }
+    .back-link { display: inline-block; font-family: 'Raleway', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--mid); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .header-wrap  { animation: fadeUp 0.5s ease both; }
+    .summary-card { animation: fadeUp 0.5s ease 0.1s both; }
+    .action-cards { animation: fadeUp 0.5s ease 0.2s both; }
+    .papers       { animation: fadeUp 0.5s ease 0.3s both; }
+    @media (max-width: 540px) {
+      .header-wrap { padding: 2rem 1rem 1.5rem; }
+      .header-card { padding: 2.5rem 1.5rem 2.5rem; }
+      .container { padding: 0 1.4rem 3rem; }
+      .action-card { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-wrap">
+    <div class="header-card">
+      <h1>Make It Easy, Suggest a Number, Skip the Thank-You</h1>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <p class="section-label">Summary</p>
+    <div class="summary-card">
+      <p class="summary-preview">Three studies show how the design of the ask itself — independent of any matching offer — shapes results. The single biggest leak in most fundraising appeals turns out to be hassle.</p>
+      <div class="summary-full" id="summary-full">
+        <p>When recipients had to find a bank account number and fill out a transfer form themselves, nearly half of those who would have given simply did not. Pre-filling the form and offering a credit-card option lifted response by 26%. The lesson is blunt: every step of friction costs you donors.</p>
+        <p>The second study tested suggested donation amounts (EUR 100 or EUR 200) printed on the form. Suggestions raised the average gift but lowered the response rate, with a small net positive — and the effect persisted a year later. Anchors matter, so choose them carefully.</p>
+        <p>The third tested two intuitions every fundraiser shares: that handwritten thank-you cards and "thank you in advance" phrases boost giving. Two preregistered field experiments found exactly zero effect for either. A polished, frictionless ask with a thoughtful suggested amount beats elaborate gratitude rituals every time.</p>
+      </div>
+      <button class="cta" id="read-more-btn" onclick="toggleSummary()">Read more →</button>
+    </div>
+
+    <p class="section-label">Explore</p>
+    <div class="action-cards">
+      <a href="#" class="action-card">
+        <div class="action-icon">🎧</div>
+        <p class="action-label">Listen</p>
+        <p class="action-sub">Podcast — coming soon</p>
+      </a>
+      <a href="#" class="action-card">
+        <div class="action-icon">▶</div>
+        <p class="action-label">Watch</p>
+        <p class="action-sub">Video — coming soon</p>
+      </a>
+      <a href="#" class="action-card">
+        <div class="action-icon">✦</div>
+        <p class="action-label">More</p>
+        <p class="action-sub">Coming soon</p>
+      </a>
+    </div>
+
+    <p class="section-label">Papers</p>
+    <div class="papers">
+
+      <div class="paper">
+        <p class="paper-citation">Huck, S. &amp; Rasul, I. (2010). Transactions costs in charitable giving: Evidence from two field experiments. <em>The B.E. Journal of Economic Analysis &amp; Policy</em>, 10(1).</p>
+        <a href="papers/huck_rasul_tcosts.pdf" class="paper-link">PDF →</a>
+      </div>
+
+      <div class="paper">
+        <p class="paper-citation">Adena, M., Huck, S. &amp; Rasul, I. (2014). Charitable giving and nonbinding contribution-level suggestions: Evidence from a field experiment. <em>Review of Behavioral Economics</em>, 1(3), 275–293.</p>
+        <a href="papers/adena_huck_rasul_suggestions.pdf" class="paper-link">PDF →</a>
+      </div>
+
+      <div class="paper">
+        <p class="paper-citation">Adena, M., Huck, S. &amp; Neyse, L. (2025). Thank you and thank you in advance: A field experiment on donor acknowledgement. <em>Experimental Economics</em>.</p>
+        <a href="papers/adena_huck_neyse.pdf" class="paper-link">PDF →</a>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <a href="index.html" class="back-link">← Back to overview</a>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleSummary() {
+      const full = document.getElementById('summary-full');
+      const btn  = document.getElementById('read-more-btn');
+      full.classList.toggle('open');
+      btn.textContent = full.classList.contains('open') ? 'Read less →' : 'Read more →';
+    }
+  </script>
+</body>
+</html>
