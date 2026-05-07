@@ -22,11 +22,15 @@
     }
     html { font-size: 17px; background: var(--bg); color: var(--charcoal); -webkit-font-smoothing: antialiased; }
     body { font-family: 'Spectral', Georgia, serif; background: var(--bg); min-height: 100vh; }
+
     .header-wrap { padding: 3rem 1.5rem 2rem; max-width: 860px; margin: 0 auto; }
     .header-card { background: var(--header-bg); border-radius: 20px; padding: 4rem 3rem 3.5rem; text-align: center; }
     h1 { font-family: 'Raleway', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; color: var(--charcoal); }
+
     .container { max-width: 720px; margin: 0 auto; padding: 0 2.5rem 4rem; }
+
     .section-label { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; margin-top: 2rem; }
+
     .summary-card { background: var(--card-bg); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 2rem; }
     .summary-preview { font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
     .summary-full { display: none; font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
@@ -34,30 +38,46 @@
     .summary-full p { margin-top: 1.1rem; }
     .cta { display: inline-block; margin-top: 1rem; font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); background: none; border: none; cursor: pointer; padding: 0; transition: opacity 0.2s; text-decoration: none; }
     .cta:hover { opacity: 0.5; }
-    .action-cards { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
-    .action-card { background: var(--card-bg); border-radius: 16px; padding: 1.4rem 1.6rem; text-decoration: none; flex: 1; min-width: 140px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+
+    .action-row { display: flex; gap: 1rem; margin-bottom: 0; }
+    .action-card { background: var(--card-bg); border-radius: 16px; padding: 1.4rem 1.6rem; flex: 1; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; user-select: none; text-align: left; }
     .action-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    .action-card.active { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
     .action-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .action-label { font-family: 'Raleway', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.2rem; }
-    .action-sub { font-family: 'Spectral', serif; font-size: 0.78rem; font-style: italic; color: var(--mid); }
+    .action-label { font-family: 'Raleway', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--charcoal); }
+
+    .action-drawer { display: none; background: var(--card-bg); border-radius: 0 0 16px 16px; padding: 1.4rem 1.6rem 1.6rem; margin-bottom: 2rem; }
+    .action-drawer.open { display: block; }
+    audio { width: 100%; border-radius: 8px; accent-color: var(--accent); }
+    video { width: 100%; border-radius: 10px; }
+    .infographic-thumb { width: 100%; border-radius: 10px; cursor: zoom-in; display: block; }
+
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; cursor: zoom-out; align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+
     .papers { display: flex; flex-direction: column; gap: 1.2rem; }
     .paper { border-left: 2px solid var(--card-bg); padding-left: 1.2rem; }
     .paper-citation { font-family: 'Spectral', serif; font-size: 0.88rem; line-height: 1.65; color: var(--mid); }
     .paper-citation em { font-style: italic; }
     .paper-link { display: inline-block; margin-top: 0.35rem; font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
     .paper-link:hover { opacity: 0.6; }
+
     .back-link { display: inline-block; font-family: 'Raleway', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light); text-decoration: none; transition: color 0.2s; }
     .back-link:hover { color: var(--mid); }
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     .header-wrap  { animation: fadeUp 0.5s ease both; }
     .summary-card { animation: fadeUp 0.5s ease 0.1s both; }
-    .action-cards { animation: fadeUp 0.5s ease 0.2s both; }
+    .action-row   { animation: fadeUp 0.5s ease 0.2s both; }
     .papers       { animation: fadeUp 0.5s ease 0.3s both; }
+
     @media (max-width: 540px) {
       .header-wrap { padding: 2rem 1rem 1.5rem; }
       .header-card { padding: 2.5rem 1.5rem 2.5rem; }
       .container { padding: 0 1.4rem 3rem; }
-      .action-card { min-width: 120px; }
+      .action-row { gap: 0.6rem; }
+      .action-card { padding: 1.1rem 1rem; }
     }
   </style>
 </head>
@@ -79,26 +99,37 @@
         <p>The second tested whether a respected quality certificate (Germany's DZI seal) raises donations. It does — by about 10% — and the cost of obtaining the seal is modest. But the boost mostly comes from new donors who are forming a first impression of the organisation. Existing donors, who have already made up their minds, barely respond.</p>
         <p>The third reviews what field experiments tell us about tax incentives for giving. The standard tax-deduction model, where donors wait months to claim a refund, consistently underperforms simpler alternatives like an instant match via the charity's tax number or a flat 15% subsidy on every gift. Policy design matters — and the current system is probably the wrong tool.</p>
       </div>
-      <button class="cta" id="read-more-btn" onclick="toggleSummary()">Read more →</button>
+      <button class="cta" id="summary-btn" onclick="toggleSummary()">Read more →</button>
     </div>
 
     <p class="section-label">Explore</p>
-    <div class="action-cards">
-      <a href="#" class="action-card">
+    <div class="action-row">
+      <div class="action-card" id="card-listen" onclick="toggleDrawer('listen')">
         <div class="action-icon">🎧</div>
         <p class="action-label">Listen</p>
-        <p class="action-sub">Podcast — coming soon</p>
-      </a>
-      <a href="#" class="action-card">
+      </div>
+      <div class="action-card" id="card-watch" onclick="toggleDrawer('watch')">
         <div class="action-icon">▶</div>
         <p class="action-label">Watch</p>
-        <p class="action-sub">Video — coming soon</p>
-      </a>
-      <a href="#" class="action-card">
+      </div>
+      <div class="action-card" id="card-info" onclick="toggleDrawer('info')">
         <div class="action-icon">✦</div>
-        <p class="action-label">More</p>
-        <p class="action-sub">Coming soon</p>
-      </a>
+        <p class="action-label">Infographic</p>
+      </div>
+    </div>
+
+    <div class="action-drawer" id="drawer-listen">
+      <audio controls src="cluster5.mp3">Your browser does not support the audio element.</audio>
+    </div>
+    <div class="action-drawer" id="drawer-watch">
+      <video controls src="cluster5.mp4">Your browser does not support the video element.</video>
+    </div>
+    <div class="action-drawer" id="drawer-info">
+      <img class="infographic-thumb" src="cluster5.png" alt="Infographic: The Bigger Picture" onclick="openLightbox(event)">
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <img src="cluster5.png" alt="Infographic: The Bigger Picture">
     </div>
 
     <p class="section-label">Papers</p>
@@ -106,17 +137,17 @@
 
       <div class="paper">
         <p class="paper-citation">Adena, M. &amp; Hager, A. (2024). Does online fundraising increase charitable giving? A nationwide field experiment with Facebook. Working paper.</p>
-        <a href="papers/adena_hager.pdf" class="paper-link">PDF →</a>
+        <a href="adena_hager.pdf" class="paper-link">PDF →</a>
       </div>
 
       <div class="paper">
         <p class="paper-citation">Adena, M., Alizade, J., Bohner, F., Harke, J. &amp; Mesters, F. (2018). Quality certifications for nonprofits, charitable giving, and donor information. Working paper.</p>
-        <a href="papers/adena_etal_quality_cert.pdf" class="paper-link">PDF →</a>
+        <a href="adena_etal_quality_cert.pdf" class="paper-link">PDF →</a>
       </div>
 
       <div class="paper">
         <p class="paper-citation">Adena, M. (2021). Tax-price elasticity of charitable donations — evidence from the German taxpayer panel. In: <em>Charitable Giving and Fundraising</em>. Routledge.</p>
-        <a href="papers/adena_routledge.pdf" class="paper-link">PDF →</a>
+        <a href="adena_routledge.pdf" class="paper-link">PDF →</a>
       </div>
 
     </div>
@@ -130,10 +161,43 @@
   <script>
     function toggleSummary() {
       const full = document.getElementById('summary-full');
-      const btn  = document.getElementById('read-more-btn');
+      const btn  = document.getElementById('summary-btn');
       full.classList.toggle('open');
       btn.textContent = full.classList.contains('open') ? 'Read less →' : 'Read more →';
     }
+
+    const drawers = ['listen', 'watch', 'info'];
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById('drawer-' + id);
+      const card   = document.getElementById('card-' + id);
+      const isOpen = drawer.classList.contains('open');
+
+      drawers.forEach(function(d) {
+        document.getElementById('drawer-' + d).classList.remove('open');
+        document.getElementById('card-' + d).classList.remove('active');
+        const media = document.getElementById('drawer-' + d).querySelector('audio, video');
+        if (media) media.pause();
+      });
+
+      if (!isOpen) {
+        drawer.classList.add('open');
+        card.classList.add('active');
+      }
+    }
+
+    function openLightbox(e) {
+      e.stopPropagation();
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 </body>
 </html>
