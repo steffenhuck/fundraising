@@ -48,17 +48,28 @@
     .cta:hover { opacity: 0.5; }
 
     /* ── Cluster cards ── */
-    .clusters { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 4.5rem; }
+    .clusters    { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
     .card { border-radius: 16px; padding: 1.6rem 1.8rem; text-decoration: none; display: block; transition: transform 0.15s ease, box-shadow 0.15s ease; }
     .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
     .card.c1 { background: var(--c1); } .card.c2 { background: var(--c2); } .card.c3 { background: var(--c3); } .card.c4 { background: var(--c4); } .card.c5 { background: var(--c5); }
     .card-title { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.55rem; letter-spacing: -0.01em; color: var(--charcoal); }
     .card-body { font-family: 'Spectral', serif; font-size: 0.88rem; line-height: 1.72; color: var(--mid); }
 
+    /* ── Origin card ── */
+    .origin-card { background: var(--synth-bg); border: 1px solid var(--rule); border-radius: 16px; padding: 1.8rem 2rem; margin-bottom: 1rem; }
+    .origin-label { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--light); margin-bottom: 1rem; }
+    .origin-text { font-family: 'Spectral', serif; font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
+    .origin-full { display: none; }
+    .origin-full.open { display: block; }
+    .origin-panels { display: flex; gap: 0.8rem; margin-top: 1.2rem; margin-bottom: 1.2rem; }
+    .origin-panels img { width: calc(33.333% - 0.55rem); border-radius: 10px; display: block; }
+    .origin-note { font-family: 'Spectral', serif; font-size: 0.88rem; font-style: italic; color: var(--light); border-top: 1px solid var(--rule); padding-top: 1rem; }
+
     /* ── Footer ── */
     footer { padding: 2.4rem 0 3.5rem; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; padding: 0 3rem; }
-    .logo-ph { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); border: 1px solid var(--rule); padding: 0.45rem 1rem; border-radius: 3px; }
+    .logo-ph { font-family: 'Raleway', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); border: 1px solid var(--rule); padding: 0.45rem 1rem; border-radius: 3px; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+    .logo-ph:hover { color: var(--mid); border-color: var(--mid); }
 
     /* ── Animations ── */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
@@ -73,6 +84,8 @@
       .container { padding: 0 1.4rem; }
       .card { padding: 1.3rem 1.4rem; }
       .synth-card { padding: 1.4rem 1.4rem; }
+      .origin-panels { flex-direction: column; }
+      .origin-panels img { width: 100%; }
       .footer-inner { flex-direction: column; align-items: flex-start; padding: 0; }
     }
   </style>
@@ -138,10 +151,24 @@
       </a>
     </div>
 
+    <div class="origin-card">
+      <p class="origin-label">Origin</p>
+      <p class="origin-text">This project began in Munich, in early 2006, during the interval of a performance of Norma at the Bavarian State Opera.</p>
+      <div class="origin-full" id="origin-full">
+        <div class="origin-panels">
+          <img src="origin1.webp" alt="The Nationaltheater, Munich — Norma">
+          <img src="origin2.webp" alt="In the interval, a deal was made">
+          <img src="origin3.webp" alt="Edita!! An experiment!!!!">
+        </div>
+        <p class="origin-note">The podcasts, videos, and infographics on this site were produced with the assistance of NotebookLM.</p>
+      </div>
+      <button class="cta" id="origin-btn" onclick="toggleOrigin()">See more →</button>
+    </div>
+
     <footer>
       <div class="footer-inner">
-        <div class="logo-ph">WZB Berlin</div>
-        <div class="logo-ph">Actori</div>
+        <a href="https://www.wzb.eu/en" target="_blank" rel="noopener" class="logo-ph">WZB Berlin</a>
+        <a href="https://www.actori.de" target="_blank" rel="noopener" class="logo-ph">Actori</a>
       </div>
     </footer>
 
@@ -153,6 +180,13 @@
       const btn  = document.getElementById('read-more-btn');
       full.classList.toggle('open');
       btn.textContent = full.classList.contains('open') ? 'Read less →' : 'Read more →';
+    }
+
+    function toggleOrigin() {
+      const full = document.getElementById('origin-full');
+      const btn  = document.getElementById('origin-btn');
+      full.classList.toggle('open');
+      btn.textContent = full.classList.contains('open') ? 'See less →' : 'See more →';
     }
   </script>
 </body>
