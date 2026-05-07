@@ -61,9 +61,14 @@
     .origin-text { font-family: 'Spectral', serif; font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
     .origin-full { display: none; }
     .origin-full.open { display: block; }
-    .origin-panels { display: flex; gap: 0.8rem; margin-top: 1.2rem; margin-bottom: 1.2rem; }
-    .origin-panels img { width: calc(33.333% - 0.55rem); border-radius: 10px; display: block; }
+    .origin-panels { display: flex; gap: 0.8rem; margin-top: 1.2rem; margin-bottom: 1.2rem; align-items: flex-start; }
+    .origin-panels img { height: 180px; width: auto; border-radius: 10px; display: block; cursor: zoom-in; }
     .origin-note { font-family: 'Spectral', serif; font-size: 0.88rem; font-style: italic; color: var(--light); border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+    /* ── Origin lightbox ── */
+    .origin-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; cursor: zoom-out; align-items: center; justify-content: center; padding: 2rem; }
+    .origin-lightbox.open { display: flex; }
+    .origin-lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 
     /* ── Footer ── */
     footer { padding: 2.4rem 0 3.5rem; }
@@ -84,8 +89,8 @@
       .container { padding: 0 1.4rem; }
       .card { padding: 1.3rem 1.4rem; }
       .synth-card { padding: 1.4rem 1.4rem; }
-      .origin-panels { flex-direction: column; }
-      .origin-panels img { width: 100%; }
+      .origin-panels { flex-direction: column; align-items: stretch; }
+      .origin-panels img { height: auto; width: 100%; }
       .footer-inner { flex-direction: column; align-items: flex-start; padding: 0; }
     }
   </style>
@@ -156,13 +161,17 @@
       <p class="origin-text">This project began in Munich, in early 2006, during the interval of a performance of Norma at the Bavarian State Opera.</p>
       <div class="origin-full" id="origin-full">
         <div class="origin-panels">
-          <img src="origin1.webp" alt="The Nationaltheater, Munich — Norma">
-          <img src="origin2.webp" alt="In the interval, a deal was made">
-          <img src="origin3.webp" alt="Edita!! An experiment!!!!">
+          <img src="origin1.webp" alt="The Nationaltheater, Munich — Norma" onclick="openOriginLightbox(this.src)">
+          <img src="origin2.webp" alt="In the interval, a deal was made" onclick="openOriginLightbox(this.src)">
+          <img src="origin3.webp" alt="Edita!! An experiment!!!!" onclick="openOriginLightbox(this.src)">
         </div>
         <p class="origin-note">The podcasts, videos, and infographics on this site were produced with the assistance of NotebookLM.</p>
       </div>
       <button class="cta" id="origin-btn" onclick="toggleOrigin()">See more →</button>
+    </div>
+
+    <div class="origin-lightbox" id="origin-lightbox" onclick="closeOriginLightbox()">
+      <img id="origin-lightbox-img" src="" alt="">
     </div>
 
     <footer>
@@ -188,6 +197,19 @@
       full.classList.toggle('open');
       btn.textContent = full.classList.contains('open') ? 'See less →' : 'See more →';
     }
+
+    function openOriginLightbox(src) {
+      document.getElementById('origin-lightbox-img').src = src;
+      document.getElementById('origin-lightbox').classList.add('open');
+    }
+
+    function closeOriginLightbox() {
+      document.getElementById('origin-lightbox').classList.remove('open');
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeOriginLightbox();
+    });
   </script>
 </body>
 </html>
